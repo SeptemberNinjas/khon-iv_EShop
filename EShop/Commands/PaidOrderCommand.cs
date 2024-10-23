@@ -23,11 +23,10 @@ public class PaidOrderCommand(List<Order> orders)
             return $"Для команды {Name} в качестве аргументов необходимо указать ID заказа, сумму и тип оплаты";
 
         if (!int.TryParse(args[0], out int orderId))
-        {
-            if (!orders.Select(order => order.OrderId).Contains(orderId))
-                return "Заказ с указанным ID не найден";
             return $"Указан некорректный ID заказа";
-        }
+        
+        if (!orders.Select(order => order.OrderId).Contains(orderId))
+            return "Заказ с указанным ID не найден";
 
         if (!decimal.TryParse(args[1], out decimal amount))
             return $"Указана некорректная сумма";
