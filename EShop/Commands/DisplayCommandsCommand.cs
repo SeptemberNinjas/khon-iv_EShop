@@ -1,23 +1,45 @@
 ﻿using System;
+using System.Linq;
 
 namespace EShop.Commands;
 
+/// <summary>
+/// Команда отображения команд
+/// </summary>
 public static class DisplayCommandsCommand
 {
+    /// <summary>
+    /// Наименование команды
+    /// </summary>
     public const string Name = "DisplayCommands";
+    
+    /// <summary>
+    /// Описание команды
+    /// </summary>
     public const string Description = "показать все команды";
 
-    public static void Execute(string[]? args)
+    /// <summary>
+    /// Выполнить команду
+    /// </summary>
+    public static string Execute(string[]? args)
     {
-        if (args == null || args.Length == 0)
+        if (args is null || args.Length == 0)
         {
-            Console.WriteLine($"{DisplayCommandsCommand.Name} - {DisplayCommandsCommand.Description}");
-            Console.WriteLine($"{DisplayProducts.Name} - {DisplayProducts.Description}");
-            Console.WriteLine($"{DisplayServices.Name} - {DisplayServices.Description}");
-            Console.WriteLine($"{ExitCommand.Name} - {ExitCommand.Description}");
-            Console.WriteLine();
+            var lines = new string[]
+            {
+                $"{DisplayCommandsCommand.Name} - {DisplayCommandsCommand.Description}",
+                $"{DisplayProductsCommand.Name} - {DisplayProductsCommand.Description}",
+                $"{DisplayServicesCommand.Name} - {DisplayServicesCommand.Description}",
+                $"{DisplayCartCommand.Name} - {DisplayCartCommand.Description}",
+                $"{AddItemToCartCommand.Name} - {AddItemToCartCommand.Description}",
+                $"{CreateOrderCommand.Name} - {CreateOrderCommand.Description}",
+                $"{DisplayOrdersCommand.Name} - {DisplayOrdersCommand.Description}",
+                $"{ExitCommand.Name} - {ExitCommand.Description}",
+            };
+            
+            return string.Join($"{Environment.NewLine}", lines);
         }
         else
-            Console.WriteLine($"Некорректное число аргументов для команды {Name}");
+            return $"Некорректное число аргументов для команды {Name}";
     }
 }
