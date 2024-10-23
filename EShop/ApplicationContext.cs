@@ -47,6 +47,7 @@ public class ApplicationContext
             CreateOrderCommand.Name => new CreateOrderCommand(_orders, _cart).Execute(commandArgs),
             DisplayOrdersCommand.Name => new DisplayOrdersCommand(_orders).Execute(commandArgs),
             DisplayCartCommand.Name => new DisplayCartCommand(_cart).Execute(commandArgs),
+            PaidOrderCommand.Name => new PaidOrderCommand(_orders).Execute(commandArgs),
             var _ => "Неизвестная команда (чтобы посмотреть все команды, введите DisplayCommands)"
         };
     }

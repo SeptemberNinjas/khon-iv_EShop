@@ -34,6 +34,7 @@ public static class DisplayCommandsCommand
                 $"{AddItemToCartCommand.Name} - {AddItemToCartCommand.Description}",
                 $"{CreateOrderCommand.Name} - {CreateOrderCommand.Description}",
                 $"{DisplayOrdersCommand.Name} - {DisplayOrdersCommand.Description}",
+                $"{PaidOrderCommand.Name} - {PaidOrderCommand.Description}",
                 $"{ExitCommand.Name} - {ExitCommand.Description}",
             };
             

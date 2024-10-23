@@ -85,11 +85,11 @@ public class Order(int orderId, Cart cart)
     /// <summary>
     /// Оплатить заказ
     /// </summary>
-    public string PaidOrder(decimal amount, PaymentTypes paymentType)
+    public string PayOrder(decimal amount, PaymentTypes paymentType)
     {
         decimal change = 0;
         
-        if (OrderTotalPrice > amount + PaymentAmount)
+        if (OrderTotalPrice < amount + PaymentAmount)
         {
             change = amount + PaymentAmount - OrderTotalPrice;
             amount -= change;
