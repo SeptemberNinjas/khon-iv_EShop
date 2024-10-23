@@ -22,7 +22,7 @@ public class AddItemToCartCommand(Cart cart)
     /// </summary>
     public string Execute(string[]? args)
     {
-        if (args is null || args.Length == 0)
+        if (args is null || args.Length != 2)
             return $"Для команды {Name} в качестве аргументов необходимо указать номенклатуру " +
                    $"и количество (если больше 1)";
         if (args.Length > 2)

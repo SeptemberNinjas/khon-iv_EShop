@@ -43,6 +43,8 @@ public class Order(int orderId, Cart cart)
     /// </summary>
     public decimal PaymentAmount = 0;
     
+    public Dictionary<PaymentTypes, decimal> PaymentList { get; private set;  } = new ();
+    
     /// <summary>
     /// Добавить элемент в заказ
     /// </summary>
@@ -83,19 +85,23 @@ public class Order(int orderId, Cart cart)
     /// <summary>
     /// Оплатить заказ
     /// </summary>
-    public string PaidOrder(decimal amount)
+    public string PayOrder(decimal amount, PaymentTypes paymentType)
     {
-        if (OrderTotalPrice > amount + PaymentAmount)
+        decimal change = 0;
+        
+        if (OrderTotalPrice < amount + PaymentAmount)
         {
-            var change = amount + PaymentAmount - OrderTotalPrice;
+            change = amount + PaymentAmount - OrderTotalPrice;
             amount -= change;
-            
-            return $"Заказ полностью оплачен, сдача: {change}";
         }
         
+        if (!PaymentList.TryAdd(paymentType, amount))
+            PaymentList[paymentType] += amount;
+        
         PaymentAmount += amount;
+        
         return PaymentAmount == OrderTotalPrice ? 
-            "Заказ полностью оплачен" : 
+            $"Заказ полностью оплачен, сдача: {change}" : 
             $"Оплата принята, необходимо внести еще {OrderTotalPrice - PaymentAmount}";
     }
 }
